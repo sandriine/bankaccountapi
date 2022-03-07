@@ -18,4 +18,25 @@ public class AccountServices {
 				.amountAccount(account.getAmountAccount()+amount)
 				.build();
 	}
+	
+	public Account withdrawal(Long amount, Account account) {
+		
+		if(amount == null) {
+			throw new AccountException("Le montant a retirer de votre compte n'est pas renseigné");
+		}
+		
+		boolean validAmount = doWithdrawal(amount, account.getAmountAccount());
+		if(!validAmount) {
+			throw new AccountException("Le solde de votre compte est insuffisant");
+		}
+
+		return Account.builder()
+				.idAccount(account.getIdAccount())
+				.amountAccount(account.getAmountAccount()-amount)
+				.build();
+	}
+	
+	private boolean doWithdrawal(Long amount, Long amountAccount) {
+		return amountAccount >= amount;
+	}
 }

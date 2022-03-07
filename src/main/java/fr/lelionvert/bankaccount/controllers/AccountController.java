@@ -25,4 +25,9 @@ public class AccountController {
 	public Account makeDeposit(@PathVariable Long idAccount, @PathVariable Long amount, @RequestBody Account account) {
 		return accountService.deposit(amount, account);
 	}
+	
+	@PutMapping("/{idAccount}/withdrawal/{amount}")
+	public Account makeWithdrawal(@PathVariable Long idAccount, @PathVariable Long amount, @RequestBody Account account) {
+		return accountService.withdrawal(amount, account);
+	}
 }
