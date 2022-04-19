@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class AccountWithdrawalTest {
 	
 	@Test
 	void shouldCreateABankAccountAndRemoveSomeMoney() {
-		Account account = Account.builder().idAccount(123456789L).amountAccount(10L).operations(new HashSet<Operation>()).build();
+		Account account = Account.builder().idAccount(123456789L).amountAccount(10L).operations(new ArrayList<Operation>()).build();
 		Account accountAfterDeposit = accountService.withdrawal(8L, account);
 		assertNotNull(accountAfterDeposit);
 		assertNotEquals(account.getAmountAccount(), accountAfterDeposit.getAmountAccount());
@@ -38,7 +38,7 @@ public class AccountWithdrawalTest {
 	
 	@Test
 	void shouldAnErrorWhenMakeWithdrawalWithAmountEqualAmountAccount() {
-		Account account = Account.builder().idAccount(123456789L).amountAccount(10L).operations(new HashSet<Operation>()).build();
+		Account account = Account.builder().idAccount(123456789L).amountAccount(10L).operations(new ArrayList<Operation>()).build();
 		Account accountAfterDeposit = accountService.withdrawal(10L, account);
 		assertEquals(account.getIdAccount(), accountAfterDeposit.getIdAccount());
 		assertEquals(accountAfterDeposit.getAmountAccount(), 0L);
@@ -46,7 +46,7 @@ public class AccountWithdrawalTest {
 	
 	@Test
 	void shouldAnErrorWhenMakeWithdrawalWithInvalidAmount() {
-		final Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new HashSet<Operation>()).build();
+		final Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new ArrayList<Operation>()).build();
 		Exception exeption = assertThrows(AccountException.class, () -> {
 			 accountService.withdrawal(200L, account);
 		});
@@ -55,7 +55,7 @@ public class AccountWithdrawalTest {
 	
 	@Test
 	void shouldAnErrorWhenMakeWithdrawalWithNullAmount() {
-		final Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new HashSet<Operation>()).build();
+		final Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new ArrayList<Operation>()).build();
 		Exception exeption = assertThrows(AccountException.class, () -> {
 			 accountService.withdrawal(null, account);
 		});
