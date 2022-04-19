@@ -1,6 +1,6 @@
 package fr.lelionvert.bankaccount;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,7 @@ class AccountDisplayOperationsTest {
 	
 	@Test
 	void shouldCreateABankAccountAndDisplayOperationsHistory() {
-		Account account = Account.builder().idAccount(1234567L).amountAccount(100L).operations(new HashSet<Operation>()).build();
+		Account account = Account.builder().idAccount(1234567L).amountAccount(100L).operations(new ArrayList<Operation>()).build();
 		Account accountAfterOperations = accountService.deposit(100L, account);
 		accountAfterOperations = accountService.withdrawal(50L, accountAfterOperations);
 		String history = accountService.displayOperationsHistory(accountAfterOperations);

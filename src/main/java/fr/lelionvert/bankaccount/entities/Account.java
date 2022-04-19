@@ -1,6 +1,6 @@
 package fr.lelionvert.bankaccount.entities;
 
-import java.util.Set;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +16,5 @@ import lombok.Setter;
 public class Account {
 	private final Long idAccount;
 	private final Long amountAccount;
-	private final Set<Operation> operations;
+	private final List<Operation> operations;
 }

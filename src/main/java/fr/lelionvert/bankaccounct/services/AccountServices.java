@@ -1,7 +1,7 @@
 package fr.lelionvert.bankaccounct.services;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -62,7 +62,7 @@ public class AccountServices {
 				.dateOperation(new Date())
 				.nameOperation(operationName)
 				.build();
-		Set<Operation> op = account.getOperations();
+		List<Operation> op = account.getOperations();
 		op.add(operation);
 		return Account.builder()
 				.idAccount(account.getIdAccount())

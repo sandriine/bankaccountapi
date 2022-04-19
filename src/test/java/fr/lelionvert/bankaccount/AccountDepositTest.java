@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class AccountDepositTest {
 
 	@Test
 	void shouldCreateABankAccountAndAddSomeMoney() {
-		Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new HashSet<Operation>()).build();
+		Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new ArrayList<Operation>()).build();
 		Account accountAfterDeposit = accountService.deposit(100L, account);
 		assertNotNull(accountAfterDeposit);
 		assertNotEquals(account.getAmountAccount(), accountAfterDeposit.getAmountAccount());
@@ -37,7 +37,7 @@ public class AccountDepositTest {
 	
 	@Test
 	void shouldAnErrorWhenMakeDepositWithNullAmount() {
-		final Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new HashSet<Operation>()).build();
+		final Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new ArrayList<Operation>()).build();
 		Exception exeption = assertThrows(AccountException.class, () -> {
 			 accountService.deposit(null, account);
 		});
@@ -46,7 +46,7 @@ public class AccountDepositTest {
 	
 	@Test
 	void shouldCreateABankAccountAndMakeDepositAndWithdrawal() {
-		Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new HashSet<Operation>()).build();
+		Account account = Account.builder().idAccount(123456789L).amountAccount(100L).operations(new ArrayList<Operation>()).build();
 		Account accountAfterOperations = accountService.deposit(100L, account);
 		accountAfterOperations = accountService.withdrawal(50L, accountAfterOperations);
 		assertNotNull(accountAfterOperations);
